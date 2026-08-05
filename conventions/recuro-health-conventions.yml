@@ -1,0 +1,74 @@
+generated: '2026-08-05'
+method: derived
+source: >-
+  well-known/recuro-health-openid-configuration.json ;
+  well-known/recuro-health-oauth-authorization-server.json
+notes: >-
+  Recuro Health publishes no API contract and no developer documentation, so only the
+  conventions of its public identity surface can be captured. Every field below is read
+  from the authorization server's own discovery metadata. Fields that would normally be
+  read from an OpenAPI or a docs site — pagination, idempotency, request tracing,
+  versioning, error envelope, rate-limit signaling — are recorded as `unknown`, meaning
+  no public evidence exists. They are NOT recorded as unsupported.
+authentication:
+  style: oauth2-bearer-jwt
+  authorization_server: https://auth.recurohealth.com/
+  provider: Auth0
+  header: 'Authorization: Bearer <access_token>'
+  pkce_required_methods:
+  - S256
+  - plain
+  mfa: supported
+  token_format: JWT
+  token_verification: https://auth.recurohealth.com/.well-known/jwks.json
+  signing_algorithms:
+  - RS256
+  - PS256
+  - HS256
+  detail: authentication/recuro-health-authentication.yml
+authorization:
+  model: oidc-scopes
+  resource_scopes_published: false
+  detail: scopes/recuro-health-scopes.yml
+idempotency:
+  supported: unknown
+  evidence: null
+  note: >-
+    No idempotency contract is published anywhere public. No Idempotency pointer is wired
+    in apis.yml — asserting one without evidence would be fabrication.
+pagination:
+  style: unknown
+  evidence: null
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_tracing:
+  request_id_header: unknown
+versioning:
+  scheme: unknown
+  note: >-
+    No versioned path, header or date-based version scheme is observable. api.recurohealth.com
+    returns HTTP 404 with a zero-length body for every probed path including /v1/*.
+error_envelope:
+  shape: unknown
+  problem_json: false
+  evidence: No public API contract to evaluate.
+rate_limiting:
+  signaling: unknown
+  headers: []
+transport:
+  tls: TLSv1.3
+  http2: true
+  hsts: false
+  note: >-
+    recurohealth.com sits behind Cloudflare and answers HTTP/2 requests from non-browser
+    clients with a 403 bot challenge; the same requests over HTTP/1.1 return 200. Neither
+    recurohealth.com nor auth.recurohealth.com sends an HSTS header.
+  detail: security/recuro-health-domain-security.yml
+cross_links:
+  authentication: authentication/recuro-health-authentication.yml
+  scopes: scopes/recuro-health-scopes.yml
+  conformance: conformance/recuro-health-conformance.yml
+  well_known: well-known/recuro-health-well-known.yml
+  domain_security: security/recuro-health-domain-security.yml

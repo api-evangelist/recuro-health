@@ -1,0 +1,109 @@
+generated: '2026-08-05'
+method: searched
+source: https://auth.recurohealth.com/.well-known/openid-configuration
+docs: https://auth.recurohealth.com/.well-known/openid-configuration
+notes: >-
+  Derived verbatim from Recuro Health's own published OpenID Connect discovery document
+  and RFC 8414 authorization-server metadata. Recuro Health publishes no OpenAPI, so
+  there are no securitySchemes to aggregate; this profile describes the identity surface
+  that fronts the platform. The protected resource APIs behind this authorization server
+  are not publicly documented.
+summary:
+  types:
+  - openIdConnect
+  - oauth2
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+  - implicit
+  - password
+  - deviceCode
+  - tokenExchange
+  - jwtBearer
+schemes:
+- name: OpenIDConnect
+  type: openIdConnect
+  openIdConnectUrl: https://auth.recurohealth.com/.well-known/openid-configuration
+  issuer: https://auth.recurohealth.com/
+  provider: Auth0
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- name: OAuth2
+  type: oauth2
+  sources:
+  - well-known/recuro-health-oauth-authorization-server.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.recurohealth.com/authorize
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+    refreshUrl: https://auth.recurohealth.com/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+  - flow: implicit
+    authorizationUrl: https://auth.recurohealth.com/authorize
+  - flow: password
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://auth.recurohealth.com/oauth/device/code
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+endpoints:
+  issuer: https://auth.recurohealth.com/
+  authorization_endpoint: https://auth.recurohealth.com/authorize
+  token_endpoint: https://auth.recurohealth.com/oauth/token
+  userinfo_endpoint: https://auth.recurohealth.com/userinfo
+  device_authorization_endpoint: https://auth.recurohealth.com/oauth/device/code
+  jwks_uri: https://auth.recurohealth.com/.well-known/jwks.json
+  registration_endpoint: https://auth.recurohealth.com/oidc/register
+  revocation_endpoint: https://auth.recurohealth.com/oauth/revoke
+  mfa_challenge_endpoint: https://auth.recurohealth.com/mfa/challenge
+grant_types_supported:
+- client_credentials
+- authorization_code
+- refresh_token
+- password
+- implicit
+- urn:ietf:params:oauth:grant-type:device_code
+- urn:ietf:params:oauth:grant-type:token-exchange
+- urn:ietf:params:oauth:grant-type:jwt-bearer
+- http://auth0.com/oauth/grant-type/password-realm
+- http://auth0.com/oauth/grant-type/passwordless/otp
+- http://auth0.com/oauth/grant-type/mfa-oob
+- http://auth0.com/oauth/grant-type/mfa-otp
+- http://auth0.com/oauth/grant-type/mfa-recovery-code
+token_endpoint_auth_methods_supported:
+- client_secret_basic
+- client_secret_post
+- private_key_jwt
+- none
+pkce:
+  supported: true
+  code_challenge_methods:
+  - S256
+  - plain
+tokens:
+  format: JWT
+  id_token_signing_alg_values_supported:
+  - HS256
+  - RS256
+  - PS256
+  presentation: 'Authorization: Bearer <access_token>'
+  jwks: well-known/recuro-health-jwks.json
+mfa:
+  supported: true
+  evidence: mfa_challenge_endpoint and Auth0 mfa-oob/mfa-otp/mfa-recovery-code grant types
+logout:
+  backchannel_logout_supported: true
+  backchannel_logout_session_supported: true
+dynamic_client_registration:
+  supported: true
+  endpoint: https://auth.recurohealth.com/oidc/register
+  spec: RFC 7591
+  note: >-
+    Advertised in the discovery document. Not exercised by this pipeline — registration
+    is a write operation and was not attempted.
+x-evidence:
+  fetched: '2026-08-05'
+  url: https://auth.recurohealth.com/.well-known/openid-configuration
+  http_status: 200
+  content_type: application/json; charset=utf-8

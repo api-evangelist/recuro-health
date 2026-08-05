@@ -1,0 +1,65 @@
+generated: '2026-08-05'
+method: searched
+probe: false
+notes: >-
+  0-working/probe-security-programs.py found nothing (trust.recurohealth.com does not
+  resolve; /trust, /security and /compliance all return 404 on recurohealth.com). This
+  file was written from a hand-fetched page the probe's path list does not cover: Recuro
+  Health publishes its compliance posture at /hitrust/, not at a conventional trust-center
+  path. There is no trust portal, no downloadable audit report, and no subprocessor list.
+url: https://recurohealth.com/hitrust/
+certifications:
+- HITRUST CSF
+- HIPAA
+frameworks:
+- id: hitrust-csf
+  status: certified
+  scope: Recuro Health infrastructure, platform and services
+  source: https://recurohealth.com/hitrust/
+- id: hipaa
+  status: published-policy
+  source: https://recurohealth.com/hipaa-policy/
+- id: ccpa-cpra
+  status: published-policy
+  source: https://recurohealth.com/california/
+not_found:
+- SOC 2
+- ISO 27001
+- PCI DSS
+- FedRAMP
+- CSA STAR
+contact:
+  route: Security Compliance Team, via https://recurohealth.com/contact/
+  security_email: null
+  note: >-
+    The HITRUST page directs questions to a "Security Compliance Team" but publishes no
+    direct address; no security@ or abuse@ address appears on any public page, and
+    /.well-known/security.txt returns 404.
+gaps:
+- No RFC 9116 security.txt on any host.
+- No vulnerability disclosure or bug bounty program found (/responsible-disclosure,
+    /vulnerability-disclosure, /security all 404).
+- No status page (recurohealth.statuspage.io redirects to Atlassian's marketing site,
+    identical to a nonexistent-subdomain control — a soft 404, not a status page).
+- No public subprocessor list or downloadable audit artifact.
+evidence:
+- source: https://recurohealth.com/hitrust/
+  http_status: 200
+  keywords:
+  - HITRUST Certified
+  - HITRUST Alliance
+  - HIPAA
+  - compliance
+  - Security Compliance Team
+- source: https://recurohealth.com/hipaa-policy/
+  http_status: 200
+- source: https://recurohealth.com/california/
+  http_status: 200
+- source: https://recurohealth.com/security
+  http_status: 404
+- source: https://recurohealth.com/trust
+  http_status: 404
+x-evidence:
+  fetched: '2026-08-05'
+  url: https://recurohealth.com/hitrust/
+  http_status: 200

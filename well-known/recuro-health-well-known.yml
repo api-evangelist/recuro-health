@@ -1,0 +1,133 @@
+generated: '2026-08-05'
+method: searched
+source: live probes of /.well-known/* across every Recuro Health host
+notes: >-
+  Only auth.recurohealth.com — the Auth0-hosted OpenID Connect authorization server —
+  publishes real /.well-known documents. member.recurohealth.com and
+  provider.recurohealth.com are single-page apps whose catch-all route answers HTTP 200
+  with the app HTML shell for EVERY /.well-known path; those 200s are recorded below as
+  soft-404s and are explicitly NOT counted as discovery documents.
+hosts:
+- host: https://auth.recurohealth.com
+  role: OpenID Connect authorization server (Auth0)
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: recuro-health-openid-configuration.json
+    spec: OpenID Connect Discovery 1.0
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: recuro-health-oauth-authorization-server.json
+    spec: RFC 8414
+  - path: /.well-known/jwks.json
+    status: 200
+    content_type: application/json; charset=utf-8
+    file: recuro-health-jwks.json
+    spec: RFC 7517
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://recurohealth.com
+  role: marketing site (WordPress behind Cloudflare)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://api.recurohealth.com
+  role: API host (responds, publishes no discovery surface)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://member.recurohealth.com
+  role: member web app (React Native / Expo SPA)
+  soft_404: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all returned the app HTML shell, not a security.txt
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all returned the app HTML shell, not JSON
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all — rejected, not an A2A agent card
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all — rejected, not an A2A agent card
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    valid: false
+- host: https://provider.recurohealth.com
+  role: provider web app (SPA on Kubernetes ingress)
+  soft_404: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all returned the app HTML shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all — rejected, not an A2A agent card
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    valid: false
+    note: SPA catch-all — rejected, not an A2A agent card
+- host: https://client.recurohealth.com
+  role: client web app (Azure App Service)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+summary:
+  documents_found: 3
+  security_txt: false
+  api_catalog: false
+  openid_configuration: true
+  oauth_authorization_server: true
+  agent_card: false

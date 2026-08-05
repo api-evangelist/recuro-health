@@ -1,0 +1,102 @@
+generated: '2026-08-05'
+method: searched
+source: >-
+  https://auth.recurohealth.com/.well-known/openid-configuration ;
+  https://recurohealth.com/hitrust/ ; https://recurohealth.com/hipaa-policy/
+notes: >-
+  Standards conformance is asserted only where a public Recuro Health surface provides
+  evidence. Recuro Health publishes no OpenAPI, AsyncAPI, GraphQL SDL or FHIR capability
+  statement, so every API-contract standard below is recorded as not conforming on the
+  basis of absence — not as a judgement about the software behind the wall.
+standards:
+- id: openid-connect-discovery-1.0
+  conforms: true
+  evidence: >-
+    https://auth.recurohealth.com/.well-known/openid-configuration returns HTTP 200
+    application/json with issuer, authorization_endpoint, token_endpoint, userinfo_endpoint
+    and jwks_uri.
+- id: oauth2
+  conforms: true
+  evidence: >-
+    Authorization server advertises authorization_code, client_credentials, refresh_token,
+    implicit, password and device_code grant types.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: >-
+    https://auth.recurohealth.com/.well-known/oauth-authorization-server returns HTTP 200
+    application/json.
+- id: rfc7517-jwks
+  conforms: true
+  evidence: https://auth.recurohealth.com/.well-known/jwks.json returns HTTP 200 with a keys array.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported includes S256 (and plain).'
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: >-
+    device_authorization_endpoint published and
+    urn:ietf:params:oauth:grant-type:device_code advertised.
+- id: rfc8693-token-exchange
+  conforms: true
+  evidence: 'grant_types_supported includes urn:ietf:params:oauth:grant-type:token-exchange.'
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint published at https://auth.recurohealth.com/oidc/register.
+- id: hitrust-csf
+  conforms: true
+  evidence: >-
+    https://recurohealth.com/hitrust/ (HTTP 200) states Recuro Health holds a HITRUST
+    certification covering its infrastructure, platform and services.
+- id: hipaa
+  conforms: true
+  evidence: >-
+    https://recurohealth.com/hipaa-policy/ (HTTP 200) publishes a HIPAA notice of privacy
+    practices; the HITRUST page frames the certification as demonstrating HIPAA compliance.
+- id: ccpa-cpra
+  conforms: true
+  evidence: https://recurohealth.com/california/ (HTTP 200) publishes California resident privacy rights.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document found on recurohealth.com, api.recurohealth.com,
+    developer.recurohealth.com, docs.recurohealth.com, member.recurohealth.com,
+    provider.recurohealth.com or client.recurohealth.com (all probes 404, or 200-with-HTML
+    SPA catch-alls that were rejected).
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document and no public webhook or event catalog published.
+- id: graphql
+  conforms: false
+  evidence: No /graphql endpoint found on any host (api.recurohealth.com/graphql returned 404).
+- id: fhir-r4
+  conforms: false
+  evidence: >-
+    No FHIR capability statement, /fhir base, or FHIR claim on any public Recuro Health
+    surface. Absence of evidence only — Recuro Health is a virtual-care platform, not a
+    published FHIR server.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No public API contract to evaluate error media types against.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt returns 404 on recurohealth.com, api.recurohealth.com and
+    auth.recurohealth.com.
+- id: rfc8615-well-known-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 on every host probed.
+- id: a2a-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json return 404 on recurohealth.com,
+    api.recurohealth.com, auth.recurohealth.com and client.recurohealth.com; the 200
+    responses on member.recurohealth.com and provider.recurohealth.com are SPA catch-alls
+    serving HTML and were rejected.
+- id: model-context-protocol
+  conforms: false
+  evidence: No hosted MCP server found on any Recuro Health host.
+summary:
+  conforms: 11
+  does_not_conform: 9
+  identity_posture: strong
+  contract_posture: absent

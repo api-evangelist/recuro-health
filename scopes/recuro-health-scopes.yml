@@ -1,0 +1,106 @@
+generated: '2026-08-05'
+method: searched
+source: https://auth.recurohealth.com/.well-known/openid-configuration
+docs: https://auth.recurohealth.com/.well-known/openid-configuration
+notes: >-
+  Every scope below is taken verbatim from the `scopes_supported` array Recuro Health
+  publishes in its own OpenID Connect discovery document. These are the standard OIDC
+  scopes and claim-scopes advertised by the authorization server; Recuro Health publishes
+  no API-resource (audience-specific) scopes anywhere public, so none are recorded here.
+  Nothing in this file is inferred.
+schemes:
+- name: OpenIDConnect
+  source: well-known/recuro-health-openid-configuration.json
+  issuer: https://auth.recurohealth.com/
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.recurohealth.com/authorize
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://auth.recurohealth.com/oauth/device/code
+    tokenUrl: https://auth.recurohealth.com/oauth/token
+scopes:
+- scope: openid
+  description: Requests an ID token; required to initiate an OpenID Connect authentication.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: profile
+  description: Basic profile claims for the authenticated end user.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: offline_access
+  description: Requests a refresh token so the client can obtain new access tokens without
+    the user present.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: email
+  description: The end user's email address claim.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: address
+  description: The end user's postal address claim.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: phone
+  description: The end user's phone number claim.
+  kind: oidc-core
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: name
+  description: The end user's full name claim.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: given_name
+  description: The end user's given name claim.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: family_name
+  description: The end user's family name claim.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: nickname
+  description: The end user's nickname claim.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: email_verified
+  description: Whether the end user's email address has been verified.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: picture
+  description: URL of the end user's profile picture.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: created_at
+  description: Timestamp the end user's account was created.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+- scope: identities
+  description: The linked identity providers associated with the end user.
+  kind: claim
+  sources:
+  - well-known/recuro-health-openid-configuration.json
+coverage:
+  scopes_total: 14
+  resource_scopes: 0
+  gap: >-
+    No API-resource scopes are published. Recuro Health's protected resource APIs are not
+    publicly documented, so the authorization model beyond OIDC identity cannot be read
+    from any public surface.
+x-evidence:
+  fetched: '2026-08-05'
+  url: https://auth.recurohealth.com/.well-known/openid-configuration
+  http_status: 200
