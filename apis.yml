@@ -14,6 +14,17 @@ description: 'Recuro Health is an integrated digital health company operating a 
   but publishes no public developer program: its documentation host requires a GitHub
   login and its ReadMe developer hub is not publicly served.'
 url: https://raw.githubusercontent.com/api-evangelist/recuro-health/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://recurohealth.com/wp-content/uploads/2023/11/Logo-RecuroHealth.png
 x-type: company
 x-source: harvest:secondary-market
