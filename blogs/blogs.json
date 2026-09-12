@@ -2,20 +2,20 @@
   "repo": "recuro-health",
   "feeds": [
     {
-      "source": "https://recurohealth.com/",
-      "feed_url": "https://recurohealth.com/",
+      "source": "https://recurohealth.com/blog/",
+      "feed_url": "https://recurohealth.com/blog/feed/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "discovered"
     },
     {
-      "source": "https://recurohealth.com/blog/",
-      "feed_url": "https://recurohealth.com/blog/",
+      "source": "https://recurohealth.com/",
+      "feed_url": "https://recurohealth.com/blog/feed/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "discovered"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-30T22:33:40Z"
+  "fetched": "2026-09-06T19:17:18Z"
 }
