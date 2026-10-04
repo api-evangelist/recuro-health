@@ -57,7 +57,6 @@ tags:
 - Employee Benefits
 - Health Plans
 - Identity
-- OpenID Connect
 apis:
 - name: Recuro Health Identity (OpenID Connect)
   description: 'Recuro Health''s member and provider identity surface, an Auth0-hosted
@@ -154,3 +153,5 @@ x-coverage:
   - url: https://auth.recurohealth.com/.well-known/openid-configuration
     status: 200
   checked: '2026-08-05'
+x-tags-removed:
+- OpenID Connect
